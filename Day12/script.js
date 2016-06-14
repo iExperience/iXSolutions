@@ -1,5 +1,5 @@
-angular.module('firstApp',[])
-.controller('FormCtrl', function($scope) {
+var app = angular.module('firstApp',[]);
+app.controller('FormCtrl', function($scope) {
   // checks if an email is in proper form (students should have their own 
   // function to do this--we have a regular expression here)
   var isValidEmail = function(email) {
