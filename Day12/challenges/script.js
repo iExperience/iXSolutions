@@ -53,7 +53,8 @@ angular.module('firstApp',[])
       isFormValid = false;
     }
     
-    if(!isValidRepeatPassword($scope.password, $scope.passwordAgain)) {
+    // if password is visible, we don't need to confirm they match
+    if(!$scope.showPassword && !isValidRepeatPassword($scope.password, $scope.passwordAgain)) {
       $scope.errorMessages.push("Make sure both passwords match");
       isFormValid = false;
     }
