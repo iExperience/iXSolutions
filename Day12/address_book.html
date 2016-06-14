@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Phone Book</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+  <script src="./address_book.js"></script>
+</head>
+<body ng-app="phoneBook">
+  <div class="container" ng-controller="PhoneCtrl">
+    <form ng-submit="addPerson()">
+      Name: <input type="text" class="form-control" ng-model="newName">
+      Number: <input type="text" class="form-control" ng-model="newNumber">
+      <button class="btn btn-default" ng-click="addPerson()">Submit</button>
+    </form>
+    <label>Search: <input ng-model="searchText"></label>
+    <ol>
+      <li ng-repeat="person in people | filter:searchText">
+        {{person.name}} -- {{person.number}}</li>
+    </ol>
+    <div ng-show="showWelcomeMessage">Thanks for signing up, {{name}}!</div>
+  </div>
+</body>
+</html>
