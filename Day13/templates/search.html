@@ -1,0 +1,10 @@
+<div ng-controller="SearchCtrl">
+  <h2>Search the NYT</h2>
+  <input type="text" class="form-control" ng-model="searchTerm">
+  <div class="btn btn-info" ng-click="search()" ng-model="searchTerm">Search</div>
+  <ol>
+    <div ng-show="articles.length == 0">Loading...</div>
+    <li ng-repeat="article in articles | filter:{title:searchTerm}">{{article.title}}</li>
+  </ol>
+  <a href="#/">View top stories</a>
+</div>
