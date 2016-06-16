@@ -1,7 +1,7 @@
 var app = angular.module("ChommiesApp", ["ngRoute"]);
 
 var CHOMMIES_API_BASE = "http://ixchommies.herokuapp.com";
-var CHOMMIES_API_TOKEN = "YOUR_KEY";
+var CHOMMIES_API_TOKEN = "gabe1242";
 
 app.config(function($routeProvider) {
   $routeProvider.when("/", {
@@ -40,6 +40,7 @@ app.controller("FeedCtrl", function($scope, $http, $filter) {
   });
 
   $scope.addProp = function() {
+    $scope.errorMessage = "";
     // submit prop to /props
     $http({
       url: CHOMMIES_API_BASE + "/props",
@@ -52,7 +53,9 @@ app.controller("FeedCtrl", function($scope, $http, $filter) {
     }).then(function(response) {
       $scope.props.unshift(response.data);
       $scope.newProp = {}
-    }); // TODO error handle
+    }).catch(function(response) {
+      $scope.errorMessage = response.data.message;
+    });
   }
 });
 
