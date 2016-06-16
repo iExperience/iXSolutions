@@ -1,7 +1,7 @@
 var app = angular.module("ChommiesApp", ["ngRoute"]);
 
 var CHOMMIES_API_BASE = "http://ixchommies.herokuapp.com";
-var CHOMMIES_API_TOKEN = "YOUR_KEY";
+var CHOMMIES_API_TOKEN = "class1234";
 
 app.config(function($routeProvider) {
   $routeProvider.when("/", {
