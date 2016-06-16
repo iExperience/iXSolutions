@@ -1,14 +1,47 @@
+body {
+  font-family: Lato;
+}
+
 .wrapper {
   padding: 20px;
   background-color: #fafafa;
   border: 1pt solid #ddd;
 }
 
+.props-feed {
+  padding-top: 10px;
+}
+
 .prop {
-  padding: 20px 0;
+  margin: 20px 0;
 }
 
 .disabled {
   opacity: .5;
   pointer-events: none;
+}
+
+h3 {
+  color: #e52881;
+  font-size: 13px;
+  margin-bottom: 0;
+}
+
+.prop p {
+  margin-top: 5px;
+  font-size: 24px;
+}
+
+.meta {
+  color: rgba(0,0,0,.6);
+}
+
+.meta>div {
+  display: inline-block;
+  margin-right: 15px
+}
+.meta span {
+  text-transform: uppercase;
+  display: block;
+  font-size: 10px;
 }

@@ -24,7 +24,6 @@ app.controller("FeedCtrl", function($scope, $http, $filter) {
       token: CHOMMIES_API_TOKEN,
     },
   }).then(function(response) {
-    console.log(response);
     $scope.props = response.data;
   });
   

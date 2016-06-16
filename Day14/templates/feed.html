@@ -21,11 +21,14 @@
   
   <div class="props-feed">
     <div class="prop" ng-repeat="prop in props">
+      <h3>@{{prop.receiver.first_name}}:</h3>
       <p>{{prop.text}}</p>
-      <div>
-        <small>Positivity: {{prop.positivity_score}}</small>
+      <div class="meta">
+        <div>
+          <span>Posted</span> {{prop.created_at|date: "MMM dd HH:m"}}
+        </div> 
+        <div><span>Positivity</span> {{prop.positivity_score | number: 3}}</div>
       </div>
-      <small>To: {{prop.receiver.first_name}}</small>
     </div>
   </div>
 </div>
