@@ -40,6 +40,7 @@ app.controller("FeedCtrl", function($scope, $http, $filter) {
   });
 
   $scope.addProp = function() {
+    $scope.isSubmitting = true;
     $scope.errorMessage = "";
     // submit prop to /props
     $http({
@@ -55,6 +56,8 @@ app.controller("FeedCtrl", function($scope, $http, $filter) {
       $scope.newProp = {}
     }).catch(function(response) {
       $scope.errorMessage = response.data.message;
+    }).finally(function() {
+      $scope.isSubmitting = false;
     });
   }
 });

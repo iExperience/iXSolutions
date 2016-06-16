@@ -5,16 +5,19 @@
   </div>
   
   <p class="alert alert-danger" ng-show="errorMessage">{{errorMessage}}</p>
-  <textarea class="form-control form-group" placeholder="Type something positive here :)" ng-model="newProp.text"></textarea>
-  <div class="row form-group">
-    <div class="col-md-4">
-      <select class="form-control" ng-model="newProp.receiver" ng-options="bru as bru.first_name for bru in brus">
-      </select>
+  
+  <form ng-class="{'disabled': isSubmitting}">
+    <textarea class="form-control form-group" placeholder="Type something positive here :)" ng-model="newProp.text"></textarea>
+    <div class="row form-group">
+      <div class="col-md-4">
+        <select class="form-control" ng-model="newProp.receiver" ng-options="bru as bru.first_name for bru in brus">
+        </select>
+      </div>
+      <div class="col-md-8">
+        <div class="btn btn-info pull-right" ng-click="addProp()">Validate and send!</div>
+      </div>
     </div>
-    <div class="col-md-8">
-      <div class="btn btn-info pull-right" ng-click="addProp()">Validate and send!</div>
-    </div>
-  </div>
+  </form>
   
   <div class="props-feed">
     <div class="prop" ng-repeat="prop in props">
