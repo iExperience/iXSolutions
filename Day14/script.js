@@ -40,8 +40,12 @@ app.controller("FeedCtrl", function($scope, $http, $filter) {
   });
 
   $scope.addProp = function() {
+    // flag for the UI that we are currently submitting
     $scope.isSubmitting = true;
+    
+    // reset any error message that existed
     $scope.errorMessage = "";
+    
     // submit prop to /props
     $http({
       url: CHOMMIES_API_BASE + "/props",
@@ -52,11 +56,14 @@ app.controller("FeedCtrl", function($scope, $http, $filter) {
         for: $scope.newProp.receiver.id
       },
     }).then(function(response) {
+      // if successful, add to the list and clear form
       $scope.props.unshift(response.data);
       $scope.newProp = {}
     }).catch(function(response) {
+      // if it failed, show the error from the API
       $scope.errorMessage = response.data.message;
     }).finally(function() {
+      // we're done submitting
       $scope.isSubmitting = false;
     });
   }
