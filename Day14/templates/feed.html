@@ -1,10 +1,10 @@
 <div ng-controller="FeedCtrl">
   <div class="form-group">
     <h2>The Props Feed</h2>
-    <a href="#/me">View my props</a>
+    <!--<a href="#/me">View my props</a>-->
   </div>
   
-  <p class="alert alert-danger" ng-show="errorMessage">{{errorMessage}}</p>
+  <!--<p class="alert alert-danger" ng-show="errorMessage">{{errorMessage}}</p>
   
   <form ng-class="{'disabled': isSubmitting}">
     <textarea class="form-control form-group" placeholder="Type something positive here :)" ng-model="newProp.text"></textarea>
@@ -17,7 +17,7 @@
         <div class="btn btn-info pull-right" ng-click="addProp()">Validate and send!</div>
       </div>
     </div>
-  </form>
+  </form>-->
   
   <div class="props-feed">
     <div class="prop" ng-repeat="prop in props">
