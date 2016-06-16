@@ -1,0 +1,9 @@
+.wrapper {
+  padding: 20px;
+  background-color: #fafafa;
+  border: 1pt solid #ddd;
+}
+
+.prop {
+  padding: 20px 0;
+}
