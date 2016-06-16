@@ -4,8 +4,7 @@
   <textarea class="form-control" placeholder="Type something positive here :)" ng-model="newProp.text"></textarea>
   <div class="row">
     <div class="col-md-4">
-      <select class="form-control" ng-model="newProp.receiver_id">
-        <option ng-repeat="bru in brus" ng-value="bru.id">{{bru.first_name}}</option>
+      <select class="form-control" ng-model="newProp.receiver" ng-options="bru as bru.first_name for bru in brus">
       </select>
     </div>
     <div class="col-md-4">
@@ -18,7 +17,6 @@
       <div>
         <small>Positivity: {{prop.positivity_score}}</small>
       </div>
-      <small>By: {{prop.sender.first_name}}</small>
       <small>To: {{prop.receiver.first_name}}</small>
     </div>
   </div>

@@ -1,5 +1,8 @@
 var app = angular.module("ChommiesApp", ["ngRoute"]);
 
+var CHOMMIES_API_BASE = "http://ixchommies.herokuapp.com";
+var CHOMMIES_API_TOKEN = "gabe1242";
+
 app.config(function($routeProvider) {
   $routeProvider.when("/", {
     templateUrl: "templates/feed.html"
@@ -12,26 +15,57 @@ app.config(function($routeProvider) {
 app.controller("FeedCtrl", function($scope, $http, $filter) {
   $scope.props = [];
   $scope.newProp = {};
-  var url = "";
+  
+  // get full feed of props
   $http({
+    url: CHOMMIES_API_BASE + "/props",
     method: "GET",
-    url: url
+    params: {
+      token: CHOMMIES_API_TOKEN,
+    },
   }).then(function(response) {
-    $scope.brus = ALL_BRUS;
-    $scope.props = ALL_PROPS;
+    console.log(response);
+    $scope.props = response.data;
+  });
+  
+  // get listing of brus
+  $http({
+    url: CHOMMIES_API_BASE + "/brus",
+    method: "GET",
+    params: {
+      token: CHOMMIES_API_TOKEN,
+    }
+  }).then(function(response) {
+    $scope.brus = response.data;
   });
 
   $scope.addProp = function() {
-    // Mock code just to illustrate effect. We would instead make a call
-    // to the API here and get to get the prop that was created with these
-    // variables filled in. 
-    $scope.newProp.positivity_score = 0.2;
-    $scope.newProp.receiver =
-      $filter('filter')($scope.brus, {id: $scope.newProp.receiver_id})[0];
-    $scope.newProp.sender = ME;
-    console.log($scope.newProp);
-    // End sample code.
-    $scope.props.unshift($scope.newProp);
-    $scope.newProp = {}
+    // submit prop to /props
+    $http({
+      url: CHOMMIES_API_BASE + "/props",
+      method: "POST",
+      params: {
+        token: CHOMMIES_API_TOKEN,
+        props: $scope.newProp.text,
+        for: $scope.newProp.receiver.id
+      },
+    }).then(function(response) {
+      $scope.props.unshift(response.data);
+      $scope.newProp = {}
+    }); // TODO error handle
   }
+});
+
+app.controller("MeCtrl", function($scope, $http) {
+  $scope.props = [];
+  // request all my props from /props/me
+  $http({
+    url: CHOMMIES_API_BASE + "/props/me",
+    method: "GET",
+    params: {
+      token: CHOMMIES_API_TOKEN,
+    },
+  }).then(function(response) {
+    $scope.props = response.data;
+  });
 });
