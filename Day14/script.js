@@ -51,6 +51,8 @@ app.controller("FeedCtrl", function($scope, $http, $filter) {
       method: "POST",
       params: {
         token: CHOMMIES_API_TOKEN,
+      },
+      data: {
         props: $scope.newProp.text,
         for: $scope.newProp.receiver.id
       },
