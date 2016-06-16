@@ -25,7 +25,7 @@
       <p>{{prop.text}}</p>
       <div class="meta">
         <div>
-          <span>Posted</span> {{prop.created_at|date: "MMM dd HH:m"}}
+          <span>Posted</span> {{prop.created_at | date: "MMM dd h:mm"}}{{prop.created_at | date : "a"| lowercase}}
         </div> 
         <div><span>Positivity</span> {{prop.positivity_score | number: 3}}</div>
       </div>
