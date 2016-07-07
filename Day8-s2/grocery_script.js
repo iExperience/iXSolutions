@@ -1,7 +1,6 @@
 var app = angular.module('phoneBook',[]);
 
 app.controller('PhoneCtrl', function($scope) {
-
   $scope.newItem = "";
   $scope.newItemQuantity = "";
   $scope.items = [];
@@ -15,13 +14,20 @@ app.controller('PhoneCtrl', function($scope) {
       }
     }
     if(!repeat) {
-      var item = {"name": $scope.newItem, "quantity": $scope.newItemQuantity};
+      var item = {
+        "name": $scope.newItem, 
+        "quantity": $scope.newItemQuantity,
+        "isEditing": false
+      };
       $scope.items.push(item);
-      console.log(item);
       $scope.newItem = "";
       $scope.newItemQuantity = "";
     }
   }
+  
+  $scope.deleteItem = function(i) {
+    $scope.items.splice(i, 1);
+  };
 
   $scope.incQuantity = function(item) {
     console.log(item);

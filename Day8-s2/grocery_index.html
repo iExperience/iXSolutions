@@ -15,12 +15,21 @@
       Quantity: <input type="text" class="form-control" ng-model="newItemQuantity">
       <button class="btn btn-default" ng-click="addItem()">Submit</button>
     </form>
-    <label>Search: <input ng-model="searchText"></label>
+    <label>Search: <input ng-model="asdfl"></label>
     <ol>
-      <li ng-repeat="item in items | filter:searchText">
-          {{item.name}} - {{item.quantity}} 
-          <span><button class="btn btn-small" ng-click="incQuantity(item)">+</button></span>
-          <span><button class="btn btn-small" ng-click="decQuantity(item)">-</button></span> 
+      <li ng-repeat="item in items | filter:asdfl">
+          <div ng-hide="item.isEditing">
+            <span  ng-dblclick="item.isEditing = true">{{item.name}} - {{item.quantity}} </span>
+            <span><button class="btn btn-small" ng-click="incQuantity(item)">+</button></span>
+            <span><button class="btn btn-small" ng-click="decQuantity(item)">-</button></span> 
+            <span><button class="btn" ng-click="item.isEditing = true">edit</button></span>
+            <span><button class="btn" ng-click="deleteItem($index)">delete</button></span>
+            
+          </div>
+          <div ng-show="item.isEditing">
+            <input ng-model="item.name">
+            <span><button class="btn" ng-click="item.isEditing = false">done</button></span>
+          </div>
       </li>
     </ol>
   </div>
