@@ -11,17 +11,18 @@
 	<div class="container" ng-controller="MainCtrl">
 		<div class="row">
 			<div class="login-btn btn" ng-hide="hasToken" ng-click="getInstaPics()">
-				  <a href="https://api.instagram.com/oauth/authorize/?client_id=178d9bea290847648de359e13a58627b&redirect_uri=http://0.0.0.0:8000&response_type=token" class="btn btn-info btn-lg btn-block">
+				  <a href="https://api.instagram.com/oauth/authorize/?client_id=8ae6b7dda3b340b588c0734820a6ed11&redirect_uri=http://localhost:8001&response_type=token" class="btn btn-info btn-lg btn-block">
           <i class="fa fa-instagram"></i>
             Log in with Instagram
           </a>
 			</div>
 			<div ng-show="hasToken">
-				<div ng-click="getInstaPics()">your instagrams here</div>
+				<a ng-click="getInstaPics()">Load instas!</a>
 				<ul>
 					<li ng-repeat="pic in picArray track by $index">
 						<img ng-src="{{ pic.images.standard_resolution.url }}" alt="">
-						<div class="pic-caption">{{ pic.caption.text }} | {{ picScores[$index] }}</div>
+						<div class="pic-caption">{{ pic.caption.text }}</div>
+						<div>Positivity: {{ picScores[$index] }}</div>
 					</li>
 				</ul>
 			</div>

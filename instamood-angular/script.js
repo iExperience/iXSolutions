@@ -48,7 +48,6 @@ app.controller('MainCtrl', function($scope, $http) {
       	}
 			}).then(function(response) {
 				$scope.picScores[key] = response.data.score;
-				// console.log($scope.picScores);
 			})
 		})
 	}
