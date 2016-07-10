@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-md-12">
+    <a href="#/">&larr; Back to all petitions</a>
+    
+    <h3>{{petition.title}}</h3>
+    <h5><a href="{{ petition.url }}">View on whitehouse.gov &rarr;</a></h5>
+
+    <p class="lead" ng-bind-html="petition.body"></p>
+
+  </div>
+</div>
+
+<div class="row petition-meta">
+  <div class="col-md-3">
+      <p>Created</p>
+      <h4>{{ petition.created * 1000 | date }} </h4>
+  </div>
+  <div class="col-md-3">
+      <p>Signatures</p>
+      <h4>{{ petition.signatureCount }} <small>of {{ petition.signaturesNeeded }}</small></h4>
+  </div>
+  <div class="col-md-3">
+      <p>Issues</p>
+      <h4 ng-repeat="i in petition.issues" ng-bind-html="i.name"> <!-- requires ngSanitize module -->
+      </h4>
+  </div>
+  <div class="col-md-3">
+      <p>Status</p>
+      <h4>
+        {{ petition.status }}
+      </h4>
+  </div>
+</div>
