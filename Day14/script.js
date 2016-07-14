@@ -1,7 +1,7 @@
 var app = angular.module("ChommiesApp", ["ngRoute"]);
 
 var CHOMMIES_API_BASE = "http://ixchommies.herokuapp.com";
-var CHOMMIES_API_TOKEN = "7181acdb265f9aa09f9fa9a85eb9ed9e";
+var CHOMMIES_API_TOKEN = "77a4f045e0dde06bfd0060b12f9def12";
 
 app.config(function($routeProvider) {
   $routeProvider.when("/", {
@@ -45,6 +45,12 @@ app.controller("FeedCtrl", function($scope, $http, $filter) {
     // reset any error message that existed
     $scope.errorMessage = "";
     
+    if(!$scope.newProp.receiver) {
+      $scope.errorMessage = "Select a bru to Prop!";
+      $scope.isSubmitting = false;
+      return;
+    }
+    
     // submit prop to /props
     $http({
       url: CHOMMIES_API_BASE + "/props",
@@ -54,7 +60,7 @@ app.controller("FeedCtrl", function($scope, $http, $filter) {
       },
       data: {
         props: $scope.newProp.text,
-        for: $scope.newProp.receiver.id
+        for: $scope.newProp.receiver
       },
     }).then(function(response) {
       // if successful, add to the list and clear form
@@ -71,7 +77,7 @@ app.controller("FeedCtrl", function($scope, $http, $filter) {
 });
 
 app.controller("MeCtrl", function($scope, $http) {
-  $scope.props = [];
+  $scope.props = undefined;
   // request all my props from /props/me
   $http({
     url: CHOMMIES_API_BASE + "/props/me",
