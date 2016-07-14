@@ -1,0 +1,10 @@
+<div ng-include="'templates/header.html'"></div>
+<div class="container">
+<h3>All channels:</h3>
+
+<div ng-repeat="(id,c) in channels">
+  <h2><a href="#/channel/{{id}}">{{c.name}}</a></h2>
+  <p class="lead">{{c.description}}</p>
+</div>
+
+</div>
