@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-md-12">
+    <a href="#" ng-click="goBack()">&larr; Back to movie search page</a>
+    
+    <h3>{{movie.Title}}</h3>
+
+    <p class="lead" ng-bind-html="movie.Plot"></p>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <dl ng-repeat="(key,value) in movie">
+      <dt>{{ key }}</dt><dd>{{value}}</dd>
+    </dl>
+  </div>
+  <div class="col-md-6">
+    <div ng-repeat="i in gifs">
+      <img ng-src="{{i.images.fixed_width.url}}">
+    </div>
+    
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-12">
+    <a href="#/">&larr; Back to all petitions</a>
+    
+    <h3>{{response.title}}</h3>
+    <h5><a href="{{ response.url }}">View on whitehouse.gov &rarr;</a></h5>
+
+    <p class="lead">{{response.body}}</p>
+
+  </div>
+</div>
+<div ng-repeat="p in petitions">
+  {{ p}}
+  
+</div>
+

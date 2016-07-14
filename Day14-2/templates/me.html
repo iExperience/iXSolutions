@@ -1,0 +1,25 @@
+<div ng-controller="MeCtrl">
+  <header>
+    <div class="container header clearfix">
+      <h1>chommies</h1>
+      <a class="link-btn" href="#/">Back to feed</a>
+    </div>
+  </header>
+  <div class="container">
+    <h2>My Props</h2>
+    <div class="props-feed">
+      <div ng-show="props != undefined && props.length === 0">
+        Nobody has sent you props. But don't worry, you're still awesome!
+      </div>
+      <div class="prop" ng-repeat="prop in props">
+        <p>{{prop.text}}</p>
+        <div class="meta">
+          <div>
+            <span>Posted</span> {{prop.created_at|date: "MMM dd HH:m"}}
+          </div> 
+          <div><span>Positivity</span> {{prop.positivity_score | number: 3}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="row">
+  <h3>Search movies</h3>
+</div>
+<div class="row search-form">
+  <form class="form-inline" ng-submit="doSearch()">
+    <div class="form-group">
+      <input class="form-control" ng-model="searchTerm">
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Search &rarr;</button>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div ng-show="movies.Error"><h4>{{movies.Error}}</h4></div>
+  <div ng-repeat="m in movies">
+    <h4><a href="#/movie/{{m.imdbID}}">{{ m.Title }}</a></h4>
+  </div>
+  <a ng-show="page > 1" ng-click="prevPage()">&larr; prev page</a>
+  <span>Showing <b>{{ (page-1)*10 + 1}}-{{ page * 10}}</b> of <b>{{ total }}</b></span>
+  <a ng-show="page*10 < total" ng-click="nextPage()">next page &rarr;</a>
+</div>

@@ -1,0 +1,37 @@
+<div ng-controller="FeedCtrl">
+  <header>
+    <div class="container header clearfix">
+      <h1>chommies</h1>
+      <a class="link-btn" href="#/me">View my props</a>
+    </div>
+  </header>
+  <div class="container">
+    <p ng-show="errorMessage" class="alert alert-danger">{{errorMessage}}</p>
+    
+    <form ng-class="{'isDisabled': isSending}">
+      <textarea class="form-control form-group" placeholder="Type something positive here :)" ng-model="newProp.text"></textarea>
+      <div class="row form-group">
+        <div class="col-md-4">
+          <select class="form-control" ng-model="newProp.receiver" ng-options="bru.id as bru.first_name for bru in brus">
+          </select>
+        </div>
+        <div class="col-md-8">
+          <div class="btn btn-info pull-right" ng-click="addProp()">Validate and send!</div>
+        </div>
+      </div>
+    </form>
+    
+    <div class="props-feed">
+      <div class="prop" ng-repeat="prop in props">
+        <h3>@{{prop.receiver.first_name}}:</h3>
+        <p>{{prop.text}}</p>
+        <div class="meta">
+          <div>
+            <span>Posted</span> {{prop.created_at | date: "MMM dd h:mm"}}{{prop.created_at | date : "a"| lowercase}}
+          </div> 
+          <div><span>Positivity</span> {{prop.positivity_score | number: 3}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
