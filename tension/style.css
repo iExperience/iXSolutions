@@ -33,7 +33,7 @@ header h1 a:hover {
 header nav {
   float: right;
   position: relative;
-  bottom: 4px;
+  bottom: 6px;
 }
 
 header nav a {
