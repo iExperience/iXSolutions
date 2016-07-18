@@ -10,7 +10,7 @@ header {
 }
 
 header h1 {
-  margin: 0;
+  margin: 500px;
   padding-bottom: 10px;
 }
 header h1 a {
@@ -20,7 +20,7 @@ header h1 a {
   text-shadow: 2px 2px 0 rgba(0,0,0,.3);
   float: left;
   display: block;
-  color: white;
+  color: pink;
   margin-top: 5px;
 }
 
