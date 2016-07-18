@@ -8,9 +8,8 @@
   </form>
   </div>
 
-
   <div class="message" ng-repeat="message in messages | orderBy: 'created_at' : true">
-    <h3>{{message.sender}} <small>{{ message.created_at | date: 'MMM d H:mm' }}</small></h3>
+    <h3>{{users[message.sender].name}} <small>{{ message.created_at | date: 'MMM d H:mm' }}</small></h3>
     <p>{{ message.text }}</p>
   </div>
 

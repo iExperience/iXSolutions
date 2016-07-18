@@ -10,7 +10,15 @@ app.run(["$rootScope", "$location", function($rootScope, $location) {
   });
 }]);
 
-app.config(function($routeProvider) {
+app.config(function($routeProvider, $locationProvider) {
+  $routeProvider.when("/login", {
+    templateUrl: "templates/login.html",
+    controller: "LoginCtrl"
+  });
+  $routeProvider.when("/signup", {
+    templateUrl: "templates/signup.html",
+    controller: "SignupCtrl"
+  });
   $routeProvider.when("/", {
     templateUrl: "templates/list.html",
     controller: "ListCtrl",
@@ -20,14 +28,6 @@ app.config(function($routeProvider) {
         }
     }
   })
-  $routeProvider.when("/login", {
-    templateUrl: "templates/login.html",
-    controller: "LoginCtrl"
-  });
-  $routeProvider.when("/signup", {
-    templateUrl: "templates/signup.html",
-    controller: "SignupCtrl"
-  });
   $routeProvider.when("/channel/:channelId", {
     templateUrl: "templates/channel.html",
     controller: "ChannelCtrl",
@@ -38,13 +38,13 @@ app.config(function($routeProvider) {
     }
   });
   
+  
   $routeProvider.otherwise("/");
 });
 
 app.controller("HeaderCtrl", function($scope, $firebaseAuth, $location) {
   var auth = $firebaseAuth();
   $scope.logout = function() {
-    console.log("log out");
     auth.$signOut();
     $location.path("/login");
   };
@@ -74,7 +74,6 @@ app.controller("LoginCtrl", function($scope, $firebaseAuth, $location) {
 
 app.controller("SignupCtrl", function($scope, $firebaseAuth, $firebaseObject, $location) {
   $scope.authObj = $firebaseAuth();
-  console.log('asdf');
   $scope.signUp = function() {
     $scope.authObj.$createUserWithEmailAndPassword($scope.email, $scope.password).then(function(firebaseUser) {
       var userRef = firebase.database().ref().child('users').child(firebaseUser.uid);
@@ -88,11 +87,15 @@ app.controller("SignupCtrl", function($scope, $firebaseAuth, $firebaseObject, $l
   
 });
 
-app.controller("ChannelCtrl", function(currentAuth, $scope, $routeParams, $firebaseArray) {
+app.controller("ChannelCtrl", function(currentAuth, $scope, $routeParams, $firebaseObject, $firebaseArray) {
   console.log(currentAuth);
   var ref = firebase.database().ref()
       .child('messages').child($routeParams.channelId);
   $scope.messages = $firebaseArray(ref);
+  
+  var usersRef = firebase.database().ref()
+      .child('users');
+  $scope.users = $firebaseObject(usersRef);
   
   $scope.sendMessage = function() {
     $scope.messages.$add({
