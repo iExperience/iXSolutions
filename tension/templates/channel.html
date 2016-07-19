@@ -3,13 +3,17 @@
   <div class="msg-form">
   <form ng-submit="sendMessage()">
       <div class="form-group">
-        <input class="form-control" placeholder="your message..." ng-model="newMessage">
+        <input class="form-control" placeholder="your message..." ng-model="newMessage.text">
+        <input type="file" fileread="newMessage.image">
       </div>
   </form>
   </div>
 
   <div class="message" ng-repeat="message in messages | orderBy: 'created_at' : true">
     <h3>{{users[message.sender].name}} <small>{{ message.created_at | date: 'MMM d H:mm' }}</small></h3>
+    <div ng-show="message.image">
+      <img ng-src="{{ message.image }}">
+    </div>
     <p>{{ message.text }}</p>
   </div>
 

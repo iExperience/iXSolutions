@@ -87,6 +87,23 @@ app.controller("SignupCtrl", function($scope, $firebaseAuth, $firebaseObject, $l
   
 });
 
+app.directive("fileread", function () {
+    return {
+        scope: {
+            fileread: "="
+        },
+        link: function (scope, element, attributes) {
+            element.bind("change", function (changeEvent) {
+                scope.$apply(function () {
+                    scope.fileread = changeEvent.target.files[0];
+                    // or all selected files:
+                    // scope.fileread = changeEvent.target.files;
+                });
+            });
+        }
+    }
+});
+
 app.controller("ChannelCtrl", function(currentAuth, $scope, $routeParams, $firebaseObject, $firebaseArray) {
   console.log(currentAuth);
   var ref = firebase.database().ref()
@@ -98,13 +115,27 @@ app.controller("ChannelCtrl", function(currentAuth, $scope, $routeParams, $fireb
   $scope.users = $firebaseObject(usersRef);
   
   $scope.sendMessage = function() {
-    $scope.messages.$add({
-      sender: currentAuth.uid,
-      text: $scope.newMessage,
-      created_at: Date.now()
+    var imgRef = firebase.storage().ref().child($scope.newMessage.image.name);
+    var uploadTask = imgRef.put($scope.newMessage.image)// Listen for state changes, errors, and completion of the upload.
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+    function(snapshot) {
+      // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log('Upload is ' + progress + '% done');
+    }, function(error) {
+      console.log(error);
+    }, function() {
+      // Upload completed successfully, now we can get the download URL
+      var downloadURL = uploadTask.snapshot.downloadURL;
+      console.log("Download", downloadURL, $scope.newMessage);
+      $scope.messages.$add({
+        sender: currentAuth.uid,
+        text: $scope.newMessage.text,
+        image: downloadURL,
+        created_at: Date.now()
+      });
     });
     
-    $scope.newMessage = "";
   };
 
 });
